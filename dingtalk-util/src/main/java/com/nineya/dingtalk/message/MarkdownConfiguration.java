@@ -195,7 +195,7 @@ public class MarkdownConfiguration <T extends DingtalkBuild> {
      * @param title 标题内容
      * @return
      */
-    public MarkdownConfiguration addTw0Title(String title) {
+    public MarkdownConfiguration addTwoTitle(String title) {
         Assert.notAllowedEmpty(title, "标题");
         this.markdown.append(String.format(TWO_TITLE_FORMAT, title));
         return this;
