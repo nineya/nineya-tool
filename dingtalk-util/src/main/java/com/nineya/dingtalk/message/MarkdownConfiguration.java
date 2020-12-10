@@ -17,19 +17,21 @@ public class MarkdownConfiguration <T extends DingtalkBuild> {
      */
     private StringBuilder markdown;
     private T build;
+    private static final String NEW_LINE = "\n\n";
     private static final String LINK_FORMAT = "[%s](%s)";
     private static final String IMG_FORMAT = "![%s](%s)";
-    private static final String ONE_TITLE_FORMAT = "\n# %s";
-    private static final String TWO_TITLE_FORMAT = "\n## %s";
-    private static final String THREE_TITLE_FORMAT = "\n### %s";
-    private static final String FOUR_TITLE_FORMAT = "\n#### %s";
-    private static final String FIVE_TITLE_FORMAT = "\n##### %s";
-    private static final String SIX_TITLE_FORMAT = "\n###### %s";
+    private static final String ONE_TITLE_FORMAT = NEW_LINE + "# %s";
+    private static final String TWO_TITLE_FORMAT = NEW_LINE + "## %s";
+    private static final String THREE_TITLE_FORMAT = NEW_LINE + "### %s";
+    private static final String FOUR_TITLE_FORMAT = NEW_LINE + "#### %s";
+    private static final String FIVE_TITLE_FORMAT = NEW_LINE + "##### %s";
+    private static final String SIX_TITLE_FORMAT = NEW_LINE + "###### %s";
     private static final String BOLD_FORMAT = "**%s**";
     private static final String ITALIC_FORMAT = "*%s*";
     private static final String BOLD_AND_ITALIC_FORMAT = " ***%s*** ";
-    private static final String ORDER_LIST_FORMAT = "\n%d. %s";
-    private static final String QUOTE_PREFIX = "\n> ";
+    private static final String ORDER_LIST_FORMAT = NEW_LINE + "%d. %s";
+    private static final String UN_ORDER_LIST_FORMAT = NEW_LINE + "- %s";
+    private static final String QUOTE_PREFIX = NEW_LINE + "> ";
 
     public MarkdownConfiguration(T build) {
         this.markdown = new StringBuilder();
@@ -88,7 +90,7 @@ public class MarkdownConfiguration <T extends DingtalkBuild> {
      * @return
      */
     public MarkdownConfiguration newLine() {
-        this.markdown.append("\n");
+        this.markdown.append(NEW_LINE);
         return this;
     }
 
@@ -114,7 +116,7 @@ public class MarkdownConfiguration <T extends DingtalkBuild> {
     public MarkdownConfiguration addQuote(String text) {
         String[] texts = text.split("\n");
         this.markdown.append(Arrays.stream(texts)
-            .collect(Collectors.joining(QUOTE_PREFIX, QUOTE_PREFIX, "\n\n")));
+            .collect(Collectors.joining(QUOTE_PREFIX, QUOTE_PREFIX, NEW_LINE)));
         return this;
     }
 
@@ -126,13 +128,13 @@ public class MarkdownConfiguration <T extends DingtalkBuild> {
      */
     public MarkdownConfiguration addUnOrderList(Collection<?> list) {
         this.markdown.append(list.stream()
-            .map(n -> "\n- " + n).collect(Collectors.joining()));
+            .map(n -> String.format(UN_ORDER_LIST_FORMAT, n)).collect(Collectors.joining()));
         return this;
     }
 
     public MarkdownConfiguration addUnOrderList(Object[] list) {
         this.markdown.append(Arrays.stream(list)
-            .map(n -> "\n- " + n).collect(Collectors.joining()));
+            .map(n -> String.format(UN_ORDER_LIST_FORMAT, n)).collect(Collectors.joining()));
         return this;
     }
 

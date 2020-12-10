@@ -8,6 +8,7 @@ import com.nineya.tool.http.HttpClient;
 import com.nineya.tool.http.HttpRequest;
 import com.nineya.tool.security.CryptoUtil;
 import com.nineya.tool.text.CheckText;
+import com.nineya.tool.validate.Assert;
 
 import java.net.URLEncoder;
 import java.util.Base64;
@@ -17,10 +18,6 @@ import java.util.Base64;
  */
 public class DingTalk {
     /**
-     * url
-     */
-    private final String webhook;
-    /**
      * 安全秘钥
      */
     private final String secret;
@@ -29,20 +26,27 @@ public class DingTalk {
      */
     private final HttpClient client;
 
-    public static DingTalk instance(String webhook) {
-        return new DingTalk(webhook, null);
+    private static final String DEFAULT_URL = "https://oapi.dingtalk.com/robot/send";
+
+    public static DingTalk instance(String accessToken) {
+        return new DingTalk(accessToken, null);
     }
 
-    public static DingTalk instance(String webhook, String secret) {
-        return new DingTalk(webhook, secret);
+    public static DingTalk instance(String accessToken, String secret) {
+        return new DingTalk(accessToken, secret);
     }
 
-    private DingTalk(String webhook, String secret) {
-        this.webhook = webhook;
+    private DingTalk(String accessToken, String secret) {
+        Assert.notAllowedEmpty(accessToken, "access_token");
         this.secret = secret;
         this.client = new HttpClient()
-            .setContentEncoding(Charsets.UTF_8)
-            .setContentType("application/json");
+                .setContentEncoding(Charsets.UTF_8)
+                .setContentType("application/json")
+                .addParams("access_token", accessToken);
+    }
+
+    private DingTalk setAccessToken(String accessToken) {
+        return this;
     }
 
     public Response send(Message message) {
@@ -51,7 +55,7 @@ public class DingTalk {
 
     public Response send(String jsonBody) {
         HttpRequest request = HttpRequest
-            .sendPost(webhook)
+            .sendPost(DEFAULT_URL)
             .setBody(jsonBody);
         if (!CheckText.isEmpty(secret)) {
             long timeStamp = System.currentTimeMillis();
