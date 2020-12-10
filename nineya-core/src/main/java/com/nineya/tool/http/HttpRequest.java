@@ -38,7 +38,6 @@ public class HttpRequest extends HttpEntity<HttpRequest> {
             String paramsStr = getParams().entrySet().stream()
                 .map(entry -> entry.getKey() + "=" + entry.getValue())
                 .collect(Collectors.joining("&", url.contains("?") ? "&" : "?", ""));
-            System.out.println(url + paramsStr);
             return new URL(url + paramsStr);
         } catch (MalformedURLException e) {
             e.printStackTrace();

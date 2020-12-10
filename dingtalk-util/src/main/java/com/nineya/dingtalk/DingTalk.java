@@ -44,7 +44,6 @@ public class DingTalk {
     }
 
     public boolean send(String jsonBody) {
-        System.out.println(jsonBody);
         HttpRequest request = HttpRequest
             .sendPost(webhook)
             .setBody(jsonBody);
