@@ -1,9 +1,11 @@
 package com.nineya.dingtalk;
 
+import com.nineya.dingtalk.message.MessageBuild;
 import com.nineya.tool.charset.Charsets;
 import com.nineya.tool.http.HttpClient;
 import com.nineya.tool.http.HttpRequest;
 import com.nineya.tool.security.CryptoUtil;
+import com.nineya.tool.text.CheckText;
 
 import java.net.URLEncoder;
 import java.util.Base64;
@@ -41,26 +43,16 @@ public class DingTalk {
             .setContentType("application/json");
     }
 
-    public boolean send() {
-        String url = webhook;
-        if (secret != null && !"".equals(secret)) {
-            long timeStamp = System.currentTimeMillis();
-            try {
-                url = String.format("%s&timestamp=%s&sign=%s",
-                    url, timeStamp, buildSign(timeStamp));
-            } catch (Exception e) {
-                return false;
-            }
-        }
-        String body = "{\n" +
-            "    \"msgtype\": \"text\",\n" +
-            "    \"text\": {\n" +
-            "        \"content\": \"吃饭！！！\"\n" +
-            "    }\n" +
-            "}";
+    public boolean send(String jsonBody) {
+        System.out.println(jsonBody);
         HttpRequest request = HttpRequest
-            .sendPost(url)
-            .setBody(body);
+            .sendPost(webhook)
+            .setBody(jsonBody);
+        if (!CheckText.isEmpty(secret)) {
+            long timeStamp = System.currentTimeMillis();
+            request.addParams("timestamp", String.valueOf(timeStamp));
+            request.addParams("sign", buildSign(timeStamp));
+        }
         String response = client.execute(request).getBody();
         System.out.println(response);
         return true;
@@ -81,9 +73,10 @@ public class DingTalk {
         }
         return null;
     }
+
     public static void main(String[] args) {
         DingTalk talk = DingTalk.instance("https://oapi.dingtalk.com/robot/send?access_token=0471c3ac101ca898f395725b49c14f8e7e231598534c78eac61b37886eafbcce",
             "SEC5cba8a00283470c49d514faae73b79682399f14b77d6e779e9973f857f99981a");
-        talk.send();
+        talk.send(MessageBuild.text().content("12345").atAll(true).atMobile("13004999290").build().toJsonString());
     }
 }

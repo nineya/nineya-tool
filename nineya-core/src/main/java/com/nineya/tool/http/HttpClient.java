@@ -7,12 +7,16 @@ import java.util.Map;
 
 public class HttpClient extends HttpEntity<HttpClient> {
 
+    /**
+     * 发送http请求方法
+     * @param request
+     * @return
+     */
     private static HttpResponse send(HttpRequest request) {
         PrintWriter out = null;
         try {
             HttpURLConnection connect = (HttpURLConnection) request.getUrl().openConnection();
             for (Map.Entry<String, String> entry : request.getHeader().entrySet()) {
-                System.out.println(entry.getKey());
                 connect.setRequestProperty(entry.getKey(), entry.getValue());
             }
             if (request.getTimeout() != 0) {
@@ -24,7 +28,6 @@ public class HttpClient extends HttpEntity<HttpClient> {
             if (request.getBody() != null) {
                 connect.setDoInput(true);
                 connect.setDoOutput(true);
-                System.out.println(request.getBody());
                 // 获取URLConnection对象对应的输出流
                 out = new PrintWriter(connect.getOutputStream());
                 out.println(request.getBody());
