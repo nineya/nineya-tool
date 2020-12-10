@@ -38,10 +38,6 @@ public class MarkdownMessageBuild extends AtBuild<MarkdownMessageBuild> implemen
         return markdownConfiguration;
     }
 
-    protected MarkdownMessageBuild getBuilder() {
-        return this;
-    }
-
     @Override
     public Message build() {
         Message message = new Message("markdown");
