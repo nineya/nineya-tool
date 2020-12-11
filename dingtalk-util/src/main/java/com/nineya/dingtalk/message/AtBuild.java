@@ -1,29 +1,30 @@
 package com.nineya.dingtalk.message;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-public class AtBuild<T extends MessageBuild>{
-    private List<String> atMobiles;
+public class AtBuild<T extends MessageBuild> {
+    private Set<String> atMobiles;
     private boolean atAll;
 
     public T atMobile(String mobile) {
         if (atMobiles == null) {
-            atMobiles = new ArrayList<>();
+            atMobiles = new LinkedHashSet<>();
         }
         atMobiles.add(mobile);
         return (T) this;
     }
 
-    public T atMobiles(List<String> atMobiles) {
-        this.atMobiles = atMobiles;
+    public T atMobiles(Collection<String> atMobiles) {
+        if (this.atMobiles == null) {
+            this.atMobiles = new LinkedHashSet<>(atMobiles);
+            return (T) this;
+        }
+        this.atMobiles.addAll(atMobiles);
         return (T) this;
     }
 
-    public T atAll(boolean atAll) {
-        this.atAll = atAll;
+    public T atAll() {
+        this.atAll = true;
         return (T) this;
     }
 

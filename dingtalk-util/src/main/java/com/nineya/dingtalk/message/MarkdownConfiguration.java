@@ -44,7 +44,7 @@ public class MarkdownConfiguration <T extends DingtalkBuild> {
      * @param text 文本内容
      * @return
      */
-    public MarkdownConfiguration addItalic(String text) {
+    public MarkdownConfiguration appendItalic(String text) {
         this.markdown.append(String.format(ITALIC_FORMAT, text));
         return this;
     }
@@ -55,7 +55,7 @@ public class MarkdownConfiguration <T extends DingtalkBuild> {
      * @param text 文本内容
      * @return
      */
-    public MarkdownConfiguration addBold(String text) {
+    public MarkdownConfiguration appendBold(String text) {
         this.markdown.append(String.format(BOLD_FORMAT, text));
         return this;
     }
@@ -66,7 +66,7 @@ public class MarkdownConfiguration <T extends DingtalkBuild> {
      * @param text 文本内容
      * @return
      */
-    public MarkdownConfiguration addBoldAndItalic(String text) {
+    public MarkdownConfiguration appendBoldAndItalic(String text) {
         this.markdown.append(String.format(BOLD_AND_ITALIC_FORMAT, text));
         return this;
     }
@@ -79,7 +79,7 @@ public class MarkdownConfiguration <T extends DingtalkBuild> {
      * @param text 文本信息
      * @return
      */
-    public MarkdownConfiguration addText(String text) {
+    public MarkdownConfiguration appendText(String text) {
         this.markdown.append(text);
         return this;
     }
@@ -101,7 +101,7 @@ public class MarkdownConfiguration <T extends DingtalkBuild> {
      * @param desc 链接描述
      * @return
      */
-    public MarkdownConfiguration addLink(String url, String desc) {
+    public MarkdownConfiguration appendLink(String url, String desc) {
         Assert.notAllowedEmpty(url, "URL");
         markdown.append(String.format(LINK_FORMAT, desc, url));
         return this;

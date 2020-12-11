@@ -2,9 +2,6 @@ package com.nineya.dingtalk.message;
 
 public interface MessageBuild extends DingtalkBuild<Message> {
 
-    @Override
-    Message build();
-
     /**
      * 创建text类型消息的构建器
      * @return 消息构建器
