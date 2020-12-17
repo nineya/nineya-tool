@@ -9,6 +9,13 @@ import java.util.regex.Pattern;
  * 有关于文本信息的验证
  */
 public class CheckText {
+    public static final String PHONE_PATTERN = "^[1]\\d{10}$";
+    public static final String NAME_PATTERN = "^([\\u4e00-\\u9fa5]{2,10}|[A-Za-z]*(\\s[A-Za-z]*)*)$";
+    public static final String MAIL_PATTERN = "^(\\w-*\\.*)+@(\\w-?)+(\\.\\w{2,})+$";
+    public static final String NINEYA_ID_PATTERN = "^[a-zA-Z]\\w{4,15}+$";
+    public static final String MD5_PATTERN = "^([a-fA-F0-9]{32})$";
+    public static final String NICK_NAME_PATTERN  = "([a-zA-Z\\u4e00-\\u9fa5]|[0-9]|"
+            + "[\\u3002\\uff1b\\uff0c\\uff1a\\u201c\\u201d\\uff08\\uff09\\u3001\\uff1f\\u300a\\u300b]){1,10}";
 
     /**
      * 判断字符串是否为空
@@ -30,8 +37,7 @@ public class CheckText {
         if (isEmpty(phone)) {
             return false;
         }
-        String re = "^[1]\\d{10}$";
-        Pattern p = Pattern.compile(re);
+        Pattern p = Pattern.compile(PHONE_PATTERN);
         Matcher m = p.matcher(phone);
         return m.matches();
     }
@@ -81,8 +87,7 @@ public class CheckText {
         if (isEmpty(name) && name.length() > nameMaxLength) {
             return false;
         }
-        String re = "^([\\u4e00-\\u9fa5]{2,10}|[A-Za-z]*(\\s[A-Za-z]*)*)$";
-        Pattern p = Pattern.compile(re);
+        Pattern p = Pattern.compile(NAME_PATTERN);
         Matcher m = p.matcher(name);
         return m.matches();
     }
@@ -114,8 +119,7 @@ public class CheckText {
         if (isEmpty(mail)) {
             return false;
         }
-        String re = "^(\\w-*\\.*)+@(\\w-?)+(\\.\\w{2,})+$";
-        Pattern p = Pattern.compile(re);
+        Pattern p = Pattern.compile(MAIL_PATTERN);
         Matcher m = p.matcher(mail);
         return m.matches();
     }
@@ -130,8 +134,7 @@ public class CheckText {
         if (isEmpty(nineyaId)) {
             return false;
         }
-        String re = "^[a-zA-Z]\\w{4,15}+$";
-        Pattern p = Pattern.compile(re);
+        Pattern p = Pattern.compile(NINEYA_ID_PATTERN);
         Matcher m = p.matcher(nineyaId);
         return m.matches();
     }
@@ -157,16 +160,6 @@ public class CheckText {
     }
 
     /**
-     * 将邮箱内容改为小写
-     *
-     * @param mail 邮箱字符串
-     * @return 字符串转小写
-     */
-    public static String mailLower(String mail) {
-        return mail.toLowerCase();
-    }
-
-    /**
      * 判断是不是md5字符串
      *
      * @param str 字符串内容
@@ -176,8 +169,7 @@ public class CheckText {
         if (isEmpty(str)) {
             return false;
         }
-        String re = "^([a-fA-F0-9]{32})$";
-        Pattern p = Pattern.compile(re);
+        Pattern p = Pattern.compile(MD5_PATTERN);
         Matcher m = p.matcher(str);
         return m.matches();
 
@@ -193,24 +185,8 @@ public class CheckText {
         if (isEmpty(nickName)) {
             return false;
         }
-        String re = "([a-zA-Z\\u4e00-\\u9fa5]|[0-9]|"
-                + "[\\u3002\\uff1b\\uff0c\\uff1a\\u201c\\u201d\\uff08\\uff09\\u3001\\uff1f\\u300a\\u300b]){1,10}";
-        Pattern p = Pattern.compile(re);
+        Pattern p = Pattern.compile(NICK_NAME_PATTERN);
         Matcher m = p.matcher(nickName);
         return m.matches();
-    }
-
-    /**
-     * 当字符串长度大于要求长度时删除超出长度的字符串，补加三个点
-     *
-     * @param str  字符串内容
-     * @param size 最大长度
-     * @return 截取前面部分字符
-     */
-    public static String limitSize(String str, int size) {
-        if (str.length() < size) {
-            return str;
-        }
-        return str.substring(0, size) + "...";
     }
 }
