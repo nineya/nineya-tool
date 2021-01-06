@@ -16,6 +16,7 @@ public class CheckText {
     public static final String MD5_PATTERN = "^([a-fA-F0-9]{32})$";
     public static final String NICK_NAME_PATTERN  = "([a-zA-Z\\u4e00-\\u9fa5]|[0-9]|"
             + "[\\u3002\\uff1b\\uff0c\\uff1a\\u201c\\u201d\\uff08\\uff09\\u3001\\uff1f\\u300a\\u300b]){1,10}";
+    public static final String CLIENT_ID_PATTERN = "^[a-zA-Z]\\w{4,15}+$";
 
     /**
      * 判断字符串是否为空
@@ -136,6 +137,20 @@ public class CheckText {
         }
         Pattern p = Pattern.compile(NINEYA_ID_PATTERN);
         Matcher m = p.matcher(nineyaId);
+        return m.matches();
+    }
+
+    /**
+     * 判断客户端id符不符合要求，5-16，可包含下划线
+     * @param clientId
+     * @return
+     */
+    public static boolean checkClientId(String clientId) {
+        if (isEmpty(clientId)) {
+            return false;
+        }
+        Pattern p = Pattern.compile(NINEYA_ID_PATTERN);
+        Matcher m = p.matcher(clientId);
         return m.matches();
     }
 
