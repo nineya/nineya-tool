@@ -58,4 +58,16 @@ public class Assert {
             throw new IllegalArgumentException(message);
         }
     }
+
+    /**
+     * 当两个对象相等时通过
+     * @param o1 对象1
+     * @param o2 对象2
+     * @param message 未通过时的错误信息
+     */
+    public static void equalsAllowed(Object o1, Object o2, String message) {
+        if ((o1 != null && !o1.equals(o2)) || (o1 == null && o2 != null)) {
+            throw new IllegalArgumentException(message);
+        }
+    }
 }
