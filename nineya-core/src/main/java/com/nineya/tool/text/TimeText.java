@@ -26,24 +26,4 @@ public class TimeText {
     public static String getCurrentTime(String format) {
         return new SimpleDateFormat(format).format(new Date());
     }
-
-    /**
-     * 以long的格式取得当前系统时间
-     *
-     * @return 时间戳
-     */
-    public static long getTimeStamp() {
-        Date today = new Date();
-        return today.getTime();
-    }
-
-    /**
-     * 使用当前时间，加随机数生成long格式的id,前面为时间，后三位为随机数
-     * 添加线程锁防止多线程访问
-     *
-     * @return id
-     */
-    public static synchronized long buildId() {
-        return (long) ((getTimeStamp() + Math.random()) * 1000);
-    }
 }
