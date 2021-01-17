@@ -135,7 +135,7 @@ public class CheckText {
         if (isEmpty(nineyaId)) {
             return false;
         }
-        Pattern p = Pattern.compile(CLIENT_ID_PATTERN);
+        Pattern p = Pattern.compile(NINEYA_ID_PATTERN);
         Matcher m = p.matcher(nineyaId);
         return m.matches();
     }
@@ -149,7 +149,7 @@ public class CheckText {
         if (isEmpty(clientId)) {
             return false;
         }
-        Pattern p = Pattern.compile(NINEYA_ID_PATTERN);
+        Pattern p = Pattern.compile(CLIENT_ID_PATTERN);
         Matcher m = p.matcher(clientId);
         return m.matches();
     }
