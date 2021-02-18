@@ -12,10 +12,11 @@ public class Assert {
 
     /**
      * 对参数进行验证，空值则抛出IllegalArgumentException
+     *
      * @param value 参数
-     * @param tips 提示信息
+     * @param tips  提示信息
      */
-    public static void notAllowedEmpty(Object value, String tips) {
+    public static void notEmptyAllowed(Object value, String tips) {
         if (value == null) {
             throw new IllegalArgumentException(tips + NULL_TIPS);
         }
@@ -27,10 +28,11 @@ public class Assert {
 
     /**
      * 验证规则是不是密码
+     *
      * @param password 密码
-     * @param tips 提示信息
+     * @param tips     提示信息
      */
-    public static void password(String password, String tips) {
+    public static void passwordAllowed(String password, String tips) {
         if (!CheckText.checkPassword(password)) {
             throw new IllegalArgumentException(tips + FORMAT_TIPS);
         }
@@ -38,19 +40,34 @@ public class Assert {
 
     /**
      * 验证传入的value值是不是true，允许true通过
-     * @param value 值
+     *
+     * @param value   值
      * @param message 错误提示信息
      */
     public static void trueAllowed(boolean value, String message) {
-       if (!value) {
-           throw new IllegalArgumentException(message);
-       }
+        if (!value) {
+            throw new IllegalArgumentException(message);
+        }
+    }
+
+
+    /**
+     * 验证规则是不是邮箱
+     *
+     * @param mail 邮箱
+     * @param tips 提示信息
+     */
+    public static void mailAllowed(String mail, String tips) {
+        if (!CheckText.checkMail(mail)) {
+            throw new IllegalArgumentException(tips + FORMAT_TIPS);
+        }
     }
 
     /**
      * 当两个对象不相等时通过
-     * @param o1 对象1
-     * @param o2 对象2
+     *
+     * @param o1      对象1
+     * @param o2      对象2
      * @param message 未通过时的错误信息
      */
     public static void noEqualsAllowed(Object o1, Object o2, String message) {
@@ -61,8 +78,9 @@ public class Assert {
 
     /**
      * 当两个对象相等时通过
-     * @param o1 对象1
-     * @param o2 对象2
+     *
+     * @param o1      对象1
+     * @param o2      对象2
      * @param message 未通过时的错误信息
      */
     public static void equalsAllowed(Object o1, Object o2, String message) {
