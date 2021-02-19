@@ -1,9 +1,12 @@
 package com.nineya.tool.http;
 
-import com.nineya.tool.charset.Charsets;
-
 import java.io.UnsupportedEncodingException;
 
+import com.nineya.tool.charset.Charsets;
+
+/**
+ * http响应内容封装
+ */
 public class HttpResponse {
     private int status;
     private byte[] body;

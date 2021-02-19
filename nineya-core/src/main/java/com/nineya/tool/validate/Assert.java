@@ -21,7 +21,7 @@ public class Assert {
             throw new IllegalArgumentException(tips + NULL_TIPS);
         }
         if (value instanceof String
-                && ((String) value).trim().length() == 0) {
+            && ((String) value).trim().length() == 0) {
             throw new IllegalArgumentException(tips + NULL_TIPS);
         }
     }
@@ -59,6 +59,39 @@ public class Assert {
      */
     public static void mailAllowed(String mail, String tips) {
         if (!CheckText.checkMail(mail)) {
+            throw new IllegalArgumentException(tips + FORMAT_TIPS);
+        }
+    }
+
+    /**
+     * 验证是不是md5字符串
+     * @param md5 字符串
+     * @param tips 提示信息
+     */
+    public static void md5Allowed(String md5, String tips) {
+        if (!CheckText.checkMd5(md5)) {
+            throw new IllegalArgumentException(tips + FORMAT_TIPS);
+        }
+    }
+
+    /**
+     * 验证是不是手机号
+     * @param phone 字符串内容
+     * @param tips 提示信息
+     */
+    public static void phoneAllowed(String phone, String tips) {
+        if (!CheckText.checkPhone(phone)) {
+            throw new IllegalArgumentException(tips + FORMAT_TIPS);
+        }
+    }
+
+    /**
+     * 验证是不是 url
+     * @param url 字符串内容
+     * @param tips 提示信息
+     */
+    public static void urlAllowed(String url, String tips) {
+        if (!CheckText.checkUrl(url)) {
             throw new IllegalArgumentException(tips + FORMAT_TIPS);
         }
     }

@@ -1,12 +1,12 @@
 package com.nineya.dingtalk.message;
 
 
-import com.nineya.tool.validate.Assert;
-
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.stream.Collectors;
+
+import com.nineya.tool.validate.Assert;
 
 /**
  * markdown配置信息
@@ -102,7 +102,7 @@ public class MarkdownConfiguration <T extends DingtalkBuild> {
      * @return
      */
     public MarkdownConfiguration appendLink(String url, String desc) {
-        Assert.notAllowedEmpty(url, "URL");
+        Assert.notEmptyAllowed(url, "URL");
         markdown.append(String.format(LINK_FORMAT, desc, url));
         return this;
     }
@@ -162,7 +162,7 @@ public class MarkdownConfiguration <T extends DingtalkBuild> {
      * @return
      */
     public MarkdownConfiguration addImg(String imgUrl, String desc) {
-        Assert.notAllowedEmpty(imgUrl, "图片URL");
+        Assert.notEmptyAllowed(imgUrl, "图片URL");
         markdown.append(String.format(IMG_FORMAT, desc, imgUrl));
         return this;
     }
@@ -184,7 +184,7 @@ public class MarkdownConfiguration <T extends DingtalkBuild> {
      * @return
      */
     public MarkdownConfiguration addOneTitle(String title) {
-        Assert.notAllowedEmpty(title, "标题");
+        Assert.notEmptyAllowed(title, "标题");
         this.markdown.append(String.format(ONE_TITLE_FORMAT, title));
         return this;
     }
@@ -196,7 +196,7 @@ public class MarkdownConfiguration <T extends DingtalkBuild> {
      * @return
      */
     public MarkdownConfiguration addTwoTitle(String title) {
-        Assert.notAllowedEmpty(title, "标题");
+        Assert.notEmptyAllowed(title, "标题");
         this.markdown.append(String.format(TWO_TITLE_FORMAT, title));
         return this;
     }
@@ -208,7 +208,7 @@ public class MarkdownConfiguration <T extends DingtalkBuild> {
      * @return
      */
     public MarkdownConfiguration addThreeTitle(String title) {
-        Assert.notAllowedEmpty(title, "标题");
+        Assert.notEmptyAllowed(title, "标题");
         this.markdown.append(String.format(THREE_TITLE_FORMAT, title));
         return this;
     }
@@ -220,7 +220,7 @@ public class MarkdownConfiguration <T extends DingtalkBuild> {
      * @return
      */
     public MarkdownConfiguration addFourTitle(String title) {
-        Assert.notAllowedEmpty(title, "标题");
+        Assert.notEmptyAllowed(title, "标题");
         this.markdown.append(String.format(FOUR_TITLE_FORMAT, title));
         return this;
     }
@@ -232,7 +232,7 @@ public class MarkdownConfiguration <T extends DingtalkBuild> {
      * @return
      */
     public MarkdownConfiguration addFiveTitle(String title) {
-        Assert.notAllowedEmpty(title, "标题");
+        Assert.notEmptyAllowed(title, "标题");
         this.markdown.append(String.format(FIVE_TITLE_FORMAT, title));
         return this;
     }
@@ -244,7 +244,7 @@ public class MarkdownConfiguration <T extends DingtalkBuild> {
      * @return
      */
     public MarkdownConfiguration addSixTitle(String title) {
-        Assert.notAllowedEmpty(title, "标题");
+        Assert.notEmptyAllowed(title, "标题");
         this.markdown.append(String.format(SIX_TITLE_FORMAT, title));
         return this;
     }

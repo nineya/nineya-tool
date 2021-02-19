@@ -1,9 +1,9 @@
 package com.nineya.dingtalk.message;
 
-import com.nineya.tool.validate.Assert;
-
 import java.util.LinkedHashMap;
 import java.util.Map;
+
+import com.nineya.tool.validate.Assert;
 
 /**
  * link类型消息构架器
@@ -52,9 +52,9 @@ public class LinkMessageBuild implements MessageBuild {
      * @param message 消息主体
      */
     private void buildLink(Message message) {
-        Assert.notAllowedEmpty(title, "消息标题");
-        Assert.notAllowedEmpty(text, "消息内容");
-        Assert.notAllowedEmpty(messageUrl, "消息跳转URL");
+        Assert.notEmptyAllowed(title, "消息标题");
+        Assert.notEmptyAllowed(text, "消息内容");
+        Assert.notEmptyAllowed(messageUrl, "消息跳转URL");
         Map<String, Object> link = new LinkedHashMap<>();
         link.put("title", title);
         link.put("text", text);

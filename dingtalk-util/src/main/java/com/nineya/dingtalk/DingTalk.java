@@ -1,5 +1,8 @@
 package com.nineya.dingtalk;
 
+import java.net.URLEncoder;
+import java.util.Base64;
+
 import com.alibaba.fastjson.JSONObject;
 import com.nineya.dingtalk.message.Message;
 import com.nineya.tool.charset.Charsets;
@@ -8,9 +11,6 @@ import com.nineya.tool.http.HttpRequest;
 import com.nineya.tool.security.CryptoUtil;
 import com.nineya.tool.text.CheckText;
 import com.nineya.tool.validate.Assert;
-
-import java.net.URLEncoder;
-import java.util.Base64;
 
 /**
  * 机器人实例
@@ -36,7 +36,7 @@ public class DingTalk {
     }
 
     private DingTalk(String accessToken, String secret) {
-        Assert.notAllowedEmpty(accessToken, "access_token");
+        Assert.notEmptyAllowed(accessToken, "access_token");
         this.secret = secret;
         this.client = new HttpClient()
                 .setContentEncoding(Charsets.UTF_8)

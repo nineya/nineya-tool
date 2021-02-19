@@ -1,11 +1,11 @@
 package com.nineya.dingtalk.message;
 
-import com.nineya.tool.validate.Assert;
-
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.nineya.tool.validate.Assert;
 
 public class ActionCardMessageBuild implements MessageBuild {
     private String title;
@@ -74,9 +74,9 @@ public class ActionCardMessageBuild implements MessageBuild {
     }
 
     private void buildActionCard(Message message) {
-        Assert.notAllowedEmpty(title, "消息标题");
-        Assert.notAllowedEmpty(markdownConfiguration, "消息内容");
-        Assert.notAllowedEmpty(actionCardBuilderAdapter, "按钮信息");
+        Assert.notEmptyAllowed(title, "消息标题");
+        Assert.notEmptyAllowed(markdownConfiguration, "消息内容");
+        Assert.notEmptyAllowed(actionCardBuilderAdapter, "按钮信息");
         actionCardMap.put("title", title);
         actionCardMap.put("text", markdownConfiguration.build());
         if (btnOrientation != -1) {

@@ -1,9 +1,9 @@
 package com.nineya.dingtalk.message;
 
-import com.nineya.tool.validate.Assert;
-
 import java.util.LinkedHashMap;
 import java.util.Map;
+
+import com.nineya.tool.validate.Assert;
 
 public class MarkdownMessageBuild extends AtBuild<MarkdownMessageBuild> implements MessageBuild {
     private String title;
@@ -47,9 +47,9 @@ public class MarkdownMessageBuild extends AtBuild<MarkdownMessageBuild> implemen
     }
 
     private void buildMarkdown(Message message) {
-        Assert.notAllowedEmpty(title, "消息标题");
+        Assert.notEmptyAllowed(title, "消息标题");
         String text = markdownConfiguration.build();
-        Assert.notAllowedEmpty(text, "消息内容");
+        Assert.notEmptyAllowed(text, "消息内容");
         Map<String, Object> markdown = new LinkedHashMap<>(2);
         markdown.put("title", title);
         markdown.put("text", text);

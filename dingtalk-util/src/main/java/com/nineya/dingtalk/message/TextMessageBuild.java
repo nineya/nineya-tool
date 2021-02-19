@@ -1,8 +1,8 @@
 package com.nineya.dingtalk.message;
 
-import com.nineya.tool.validate.Assert;
+import java.util.AbstractMap;
 
-import java.util.*;
+import com.nineya.tool.validate.Assert;
 
 public class TextMessageBuild extends AtBuild<TextMessageBuild> implements MessageBuild {
     private String content;
@@ -21,7 +21,7 @@ public class TextMessageBuild extends AtBuild<TextMessageBuild> implements Messa
     }
 
     private void buildText(Message message) {
-        Assert.notAllowedEmpty(content, "消息内容");
+        Assert.notEmptyAllowed(content, "消息内容");
         message.add("text", new AbstractMap.SimpleEntry<>("content", content));
     }
 }

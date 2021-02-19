@@ -1,11 +1,11 @@
 package com.nineya.tool.http;
 
-import com.nineya.tool.restful.Methods;
-
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Map;
 import java.util.stream.Collectors;
+
+import com.nineya.tool.restful.Methods;
 
 public class HttpRequest extends HttpEntity<HttpRequest> {
     private String method;
@@ -17,10 +17,22 @@ public class HttpRequest extends HttpEntity<HttpRequest> {
         this.url = url;
     }
 
+    /**
+     * 创建post请求
+     *
+     * @param url
+     * @return
+     */
     public static HttpRequest sendPost(String url) {
         return new HttpRequest(Methods.POST, url);
     }
 
+    /**
+     * 创建get请求
+     *
+     * @param url
+     * @return
+     */
     public static HttpRequest sendGet(String url) {
         return new HttpRequest(Methods.GET, url);
     }
@@ -32,7 +44,7 @@ public class HttpRequest extends HttpEntity<HttpRequest> {
     public URL getUrl() {
         try {
             Map<String, String> params = getParams();
-            if (params== null || params.isEmpty()) {
+            if (params == null || params.isEmpty()) {
                 return new URL(url);
             }
             String paramsStr = getParams().entrySet().stream()
