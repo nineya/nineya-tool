@@ -8,10 +8,11 @@ import java.util.Map;
 /**
  * 创建http请求客户端
  */
-public class HttpClient extends HttpEntity<HttpClient> {
+public class HttpClient extends AbstractHttpRequest<HttpClient> {
 
     /**
      * 发送http请求方法
+     *
      * @param request
      * @return
      */
@@ -58,6 +59,7 @@ public class HttpClient extends HttpEntity<HttpClient> {
     /**
      * 执行参数处理
      * 将
+     *
      * @param request
      * @return
      */
@@ -73,13 +75,14 @@ public class HttpClient extends HttpEntity<HttpClient> {
     /**
      * 将两个map合并到一个新的map中
      * 在新的 map 中 addMap 中的参数内容将覆盖 sourceMap 中的内容
+     *
      * @param sourceMap
      * @param addMap
      * @param <T>
      * @param <V>
      * @return
      */
-    private <T,V> Map<T, V> coverCollection(Map<T, V> sourceMap, Map<T, V> addMap) {
+    private <T, V> Map<T, V> coverCollection(Map<T, V> sourceMap, Map<T, V> addMap) {
         if (sourceMap == null) {
             if (addMap == null) {
                 return new HashMap<>();

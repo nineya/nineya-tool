@@ -1,65 +1,35 @@
 package com.nineya.tool.http;
 
-import java.util.HashMap;
-import java.util.Map;
+public interface HttpEntity<T extends HttpEntity> {
 
-/**
- * 发送http请求，请求内容实体，包括请求头实体，请求参数实体，超时时间
- * @param <T>
- */
-public class HttpEntity<T extends HttpEntity> {
-    private Map<String, String> header;
-    private Map<String, String> params;
-    private int timeout;
+    /**
+     * 设置实体类型
+     * @param type 实体类型
+     */
+    T setContentType(String type);
 
-    public T addHeader(String name, String value) {
-        if (header == null) {
-            header = new HashMap<>();
-        }
-        header.put(name, value);
-        return (T)this;
-    }
+    /**
+     * 取得实体类型
+     * @return 实体类型
+     */
+    String getContentType();
 
-    public T addParams(String name, String value) {
-        if (params == null) {
-            params = new HashMap<>();
-        }
-        params.put(name, value);
-        return (T)this;
-    }
+    /**
+     * 设置实体编码
+     * @param encode 实体编码
+     * @return
+     */
+    T setContentEncoding(String encode);
 
-    public T setHeader(Map<String, String> header) {
-        this.header = header;
-        return (T)this;
-    }
+    /**
+     * 取得实体编码
+     * @return 实体编码
+     */
+    String getContentEncoding();
 
-    public T setParams(Map<String, String> params) {
-        this.params = params;
-        return (T)this;
-    }
-
-    public T setContentType(String type) {
-        return addHeader("Content-Type", type);
-    }
-
-    public T setContentEncoding(String encode) {
-        return addHeader("Content-Encoding", encode);
-    }
-
-    public Map<String, String> getHeader() {
-        return header;
-    }
-
-    public Map<String, String> getParams() {
-        return params;
-    }
-
-    public T setTimeout(int timeout) {
-        this.timeout = timeout;
-        return (T)this;
-    }
-
-    public int getTimeout() {
-        return timeout;
-    }
+    /**
+     * 取得实体内容
+     * @return 实体内容
+     */
+    String getContent();
 }

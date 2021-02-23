@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 import com.nineya.tool.restful.Methods;
 
-public class HttpRequest extends HttpEntity<HttpRequest> {
+public class HttpRequest extends AbstractHttpRequest<HttpRequest> {
     private String method;
     private String url;
     private String body;
@@ -59,6 +59,17 @@ public class HttpRequest extends HttpEntity<HttpRequest> {
 
     public HttpRequest setBody(String body) {
         this.body = body;
+        return this;
+    }
+
+    public HttpRequest setBody(HttpEntity entity) {
+        this.body = entity.getContent();
+        if (entity.getContentEncoding() != null) {
+            setContentEncoding(entity.getContentEncoding());
+        }
+        if (entity.getContentType() != null) {
+            setContentType(entity.getContentType());
+        }
         return this;
     }
 
