@@ -1,9 +1,9 @@
 package com.nineya.tool.restful;
 
-import com.nineya.tool.text.CheckText;
-
 import java.util.LinkedHashMap;
 import java.util.Map;
+
+import com.nineya.tool.text.CheckText;
 
 /**
  * @author 殇雪话诀别
@@ -13,11 +13,11 @@ public class ResponseResult<T> {
     /**
      * 是否响应成功
      */
-    private Boolean error;
+    private boolean error;
     /**
      * 响应状态码
      */
-    private Integer status;
+    private int status;
     /**
      * 错误信息
      */
@@ -71,20 +71,20 @@ public class ResponseResult<T> {
         return new ResponseResult(StatusCode.SERVER_ERROR);
     }
 
-    public Boolean getError() {
+    public boolean getError() {
         return error;
     }
 
-    public ResponseResult setError(Boolean error) {
+    public ResponseResult setError(boolean error) {
         this.error = error;
         return this;
     }
 
-    public Integer getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public ResponseResult setStatus(Integer status) {
+    public ResponseResult setStatus(int status) {
         this.status = status;
         return this;
     }

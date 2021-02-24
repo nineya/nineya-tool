@@ -30,18 +30,18 @@ public enum StatusCode {
     /**
      * 响应状态码
      */
-    private Integer code;
+    private int code;
     /**
      * 响应信息
      */
     private String message;
 
-    StatusCode(Integer code, String message) {
+    StatusCode(int code, String message) {
         this.code = code;
         this.message = message;
     }
 
-    public Integer getCode() {
+    public int getCode() {
         return code;
     }
     public String getMessage() {
