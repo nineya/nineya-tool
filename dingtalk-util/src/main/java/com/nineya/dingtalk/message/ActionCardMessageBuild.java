@@ -5,6 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.nineya.tool.spi.BuilderAdapter;
 import com.nineya.tool.validate.Assert;
 
 public class ActionCardMessageBuild implements MessageBuild {

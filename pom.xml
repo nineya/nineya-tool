@@ -22,6 +22,8 @@
     <modules>
         <module>nineya-core</module>
         <module>dingtalk-util</module>
+        <module>feature-core</module>
+        <module>feature-web</module>
     </modules>
 
     <properties>
@@ -67,6 +69,11 @@
             <dependency>
                 <groupId>com.nineya.tool</groupId>
                 <artifactId>nineya-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.nineya.tool</groupId>
+                <artifactId>feature-core</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

@@ -6,12 +6,13 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.stream.Collectors;
 
+import com.nineya.tool.spi.Builder;
 import com.nineya.tool.validate.Assert;
 
 /**
  * markdown配置信息
  */
-public class MarkdownConfiguration <T extends DingtalkBuild> {
+public class MarkdownConfiguration <T extends Builder> {
     /**
      * markdown消息内容
      */

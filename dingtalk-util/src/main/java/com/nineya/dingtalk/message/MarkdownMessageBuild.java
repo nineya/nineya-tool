@@ -3,6 +3,7 @@ package com.nineya.dingtalk.message;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import com.nineya.tool.spi.BuilderAdapter;
 import com.nineya.tool.validate.Assert;
 
 public class MarkdownMessageBuild extends AtBuild<MarkdownMessageBuild> implements MessageBuild {

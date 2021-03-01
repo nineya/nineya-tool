@@ -1,4 +1,4 @@
-package com.nineya.dingtalk.message;
+package com.nineya.tool.spi;
 
 /**
  * 处理创建适配配置信息的接口

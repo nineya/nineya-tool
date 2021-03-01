@@ -1,6 +1,8 @@
 package com.nineya.dingtalk.message;
 
-public interface MessageBuild extends DingtalkBuild<Message> {
+import com.nineya.tool.spi.Builder;
+
+public interface MessageBuild extends Builder<Message> {
 
     /**
      * 创建text类型消息的构建器
