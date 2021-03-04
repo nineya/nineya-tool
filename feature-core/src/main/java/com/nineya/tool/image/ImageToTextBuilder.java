@@ -15,30 +15,30 @@ import com.nineya.tool.util.ImageUtil;
  *
  * @author 殇雪话诀别
  */
-public class ImageToText implements Builder<String> {
+public class ImageToTextBuilder implements Builder<String> {
     /**
      * 待处理的图片
      */
     private BufferedImage image;
     /**
-     * 图片高度，像素点
+     * 图片默认高度，像素点
      */
     private int height = 100;
 
-    private ImageToText(BufferedImage image) {
+    private ImageToTextBuilder(BufferedImage image) {
         this.image = image;
     }
 
-    public static ImageToText create(BufferedImage image) {
-        return new ImageToText(image);
+    public static ImageToTextBuilder create(BufferedImage image) {
+        return new ImageToTextBuilder(image);
     }
 
-    public static ImageToText create(String filePath) throws IOException {
-        return new ImageToText(ImageIO.read(new File(filePath)));
+    public static ImageToTextBuilder create(String filePath) throws IOException {
+        return new ImageToTextBuilder(ImageIO.read(new File(filePath)));
     }
 
-    public static ImageToText create(InputStream stream) throws IOException {
-        return new ImageToText(ImageIO.read(stream));
+    public static ImageToTextBuilder create(InputStream stream) throws IOException {
+        return new ImageToTextBuilder(ImageIO.read(stream));
     }
 
 
@@ -48,7 +48,7 @@ public class ImageToText implements Builder<String> {
      *
      * @param characterNum 字符数
      */
-    public ImageToText setHeightCharacterNum(int characterNum) {
+    public ImageToTextBuilder setHeightCharacterNum(int characterNum) {
         this.height = characterNum * 2;
         return this;
     }
@@ -122,8 +122,7 @@ public class ImageToText implements Builder<String> {
 
     @Override
     public String build() {
-        image = ImageUtil.enlargeImageByHeight(image, height);
-        image = ImageUtil.colorlessImage(image);
+        image = ImageUtil.colorlessImage(ImageUtil.enlargeImageByHeight(image, height));
         return conversion();
     }
 }

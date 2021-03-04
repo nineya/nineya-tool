@@ -23,7 +23,6 @@
         <module>nineya-core</module>
         <module>dingtalk-util</module>
         <module>feature-core</module>
-        <module>feature-web</module>
     </modules>
 
     <properties>
@@ -87,9 +86,9 @@
     <profiles>
         <profile>
             <id>release</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
+<!--            <activation>-->
+<!--                <activeByDefault>true</activeByDefault>-->
+<!--            </activation>-->
             <properties>
                 <gpg.executable>E:\Program Files\Git\usr\bin\gpg.exe</gpg.executable>
                 <gpg.passphrase>LSW361654768</gpg.passphrase>

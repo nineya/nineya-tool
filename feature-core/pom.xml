@@ -11,10 +11,25 @@
 
     <artifactId>feature-core</artifactId>
 
+    <properties>
+        <poi.version>5.0.0</poi.version>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>com.nineya.tool</groupId>
             <artifactId>nineya-core</artifactId>
+        </dependency>
+        <!--核心jar包-->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>${poi.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>${poi.version}</version>
         </dependency>
     </dependencies>
 
