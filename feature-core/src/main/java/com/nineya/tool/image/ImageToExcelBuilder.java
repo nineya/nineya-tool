@@ -106,7 +106,7 @@ public class ImageToExcelBuilder {
         // Pixels 和 Points 可以使用 Units 工具类换算，工具类中设置了默认的像素与点的dpi为 96/72
         // 这里将 Points 换算为 Pixels 最后换算为 1/256 个字符单位
         // 但是实际按这个值进行转换总会让宽大于高，所以这里未采用 256 这个数值
-        int colWidth = Units.pointsToPixel(rowHeight * 240.0 / Units.DEFAULT_CHARACTER_WIDTH);
+        int colWidth = Units.pointsToPixel(rowHeight * 220.0 / Units.DEFAULT_CHARACTER_WIDTH);
         // 设置默认列宽貌似有bug，未能成功，打开文件时提示异常，所以只好单独设置宽度
         // sheet.setDefaultColumnWidth(colWidth);
 

@@ -10,7 +10,8 @@ import java.util.TimeZone;
  * 2020/12/11
  */
 public class TimeUtil {
-    private static final String TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
+    private static final String DEFAULT_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
+    private static final String MINIMAL_TIME_FORMAT = "yyyyMMddHHmmss";
     /**
      * 一天的时长
      */
@@ -22,7 +23,16 @@ public class TimeUtil {
      * @return
      */
     public static String currentTime() {
-        return currentTime(TIME_FORMAT);
+        return currentTime(DEFAULT_TIME_FORMAT);
+    }
+
+    /**
+     * 以极简的风格取得当前时间
+     *
+     * @return
+     */
+    public static String currentMinimalTime() {
+        return currentTime(MINIMAL_TIME_FORMAT);
     }
 
     /**
@@ -48,7 +58,7 @@ public class TimeUtil {
     /**
      * 将指定格式的string 时间转换为 long 时间
      *
-     * @param time 时间strig
+     * @param time   时间strig
      * @param format 时间格式模板
      * @return
      */

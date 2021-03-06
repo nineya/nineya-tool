@@ -21,9 +21,9 @@ public class ImageToTextBuilder implements Builder<String> {
      */
     private BufferedImage image;
     /**
-     * 图片默认高度，像素点
+     * 图片默认高度，像素点，即50行字符
      */
-    private int height = 100;
+    private int rowNum = 100;
 
     private ImageToTextBuilder(BufferedImage image) {
         this.image = image;
@@ -46,10 +46,10 @@ public class ImageToTextBuilder implements Builder<String> {
      * 图片高度，占有的字符数量
      * 一个字符高度等于2个像素点
      *
-     * @param characterNum 字符数
+     * @param rowNum 字符行数
      */
-    public ImageToTextBuilder setHeightCharacterNum(int characterNum) {
-        this.height = characterNum * 2;
+    public ImageToTextBuilder setRowNum(int rowNum) {
+        this.rowNum = rowNum * 2;
         return this;
     }
 
@@ -111,7 +111,7 @@ public class ImageToTextBuilder implements Builder<String> {
     private String conversion() {
         int weight = image.getWidth();
         StringBuilder sb = new StringBuilder();
-        for (int i = 1; i < height; i += 2) {
+        for (int i = 1; i < rowNum; i += 2) {
             for (int j = 0; j < weight; j++) {
                 sb.append(convertSymbol(getImagePixel(j, i)));
             }
@@ -122,7 +122,7 @@ public class ImageToTextBuilder implements Builder<String> {
 
     @Override
     public String build() {
-        image = ImageUtil.colorlessImage(ImageUtil.enlargeImageByHeight(image, height));
+        image = ImageUtil.colorlessImage(ImageUtil.enlargeImageByHeight(image, rowNum));
         return conversion();
     }
 }
