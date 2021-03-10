@@ -121,4 +121,22 @@ public class Assert {
             throw new IllegalArgumentException(message);
         }
     }
+
+    /**
+     * 允许正数通过
+     */
+    public static void positiveAllowed(long num, String message) {
+        if (num <= 0) {
+            throw new IllegalArgumentException(message);
+        }
+    }
+
+    /**
+     * 允许负数通过，不包括0
+     */
+    public static void negativeAllowed(long num, String message) {
+        if (num >= 0) {
+            throw new IllegalArgumentException(message);
+        }
+    }
 }
