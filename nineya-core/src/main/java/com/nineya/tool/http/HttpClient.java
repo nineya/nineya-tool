@@ -40,11 +40,18 @@ public class HttpClient extends AbstractHttpRequest<HttpClient> {
             }
             // 定义BufferedReader输入流来读取URL的响应
             InputStream inputStream = connect.getInputStream();
-
-            byte[] bytes = new byte[inputStream.available()];
-            inputStream.read(bytes);
+            int buffSize = inputStream.available();
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream(buffSize);
+            byte[] bytes = new byte[buffSize];
+            int size = 0;
+            while ((size = inputStream.read(bytes)) != -1) {
+                outputStream.write(bytes, 0, size);
+            }
+            byte[] results = outputStream.toByteArray();
+            outputStream.close();
+            inputStream.close();
             return new HttpResponse()
-                .setBody(bytes)
+                .setBody(results)
                 .setStatus(connect.getResponseCode());
         } catch (IOException e) {
             e.printStackTrace();
