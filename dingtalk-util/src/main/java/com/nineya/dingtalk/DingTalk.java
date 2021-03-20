@@ -52,7 +52,7 @@ public class DingTalk {
         return send(message.toJsonString());
     }
 
-    public Response send(String jsonBody) {
+    private Response send(String jsonBody) {
         HttpRequest request = HttpRequest
             .sendPost(DEFAULT_URL)
             .setBody(jsonBody);
