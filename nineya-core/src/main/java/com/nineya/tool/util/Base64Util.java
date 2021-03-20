@@ -11,26 +11,25 @@ import java.util.Base64;
  */
 public class Base64Util {
     /**
-     * 字符串转base64
+     * base64编码
      *
      * @param data 字符串内容
      * @return base64编码
      */
-    public static String stringToBase64(String data) {
+    public static String base64Encoder(String data) {
         if (CheckText.isEmpty(data)) {
             return null;
         }
-        byte[] resultBytes = null;
-        resultBytes = data.getBytes(StandardCharsets.UTF_8);
+        byte[] resultBytes = data.getBytes(StandardCharsets.UTF_8);
         return Base64.getEncoder().encodeToString(resultBytes);
     }
 
     /**
-     * base64转字符串
+     * base64解码
      * @param data base64编码
      * @return 字符串内容
      */
-    public static String base64ToString(String data) {
+    public static String base64Decoder(String data) {
         if (CheckText.isEmpty(data)) {
             return null;
         }

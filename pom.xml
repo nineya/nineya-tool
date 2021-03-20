@@ -18,7 +18,7 @@
     <groupId>com.nineya.tool</groupId>
     <artifactId>nineya-tool</artifactId>
     <packaging>pom</packaging>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <modules>
         <module>nineya-core</module>
         <module>dingtalk-util</module>
@@ -86,9 +86,9 @@
     <profiles>
         <profile>
             <id>release</id>
-<!--            <activation>-->
-<!--                <activeByDefault>true</activeByDefault>-->
-<!--            </activation>-->
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
             <properties>
                 <gpg.executable>E:\Program Files\Git\usr\bin\gpg.exe</gpg.executable>
                 <gpg.passphrase>LSW361654768</gpg.passphrase>

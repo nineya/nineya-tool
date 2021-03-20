@@ -1,9 +1,12 @@
 package com.nineya.tool.security;
 
+import com.nineya.tool.util.Base64Util;
+
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
