@@ -12,7 +12,7 @@ public class ActionCardMessageBuild implements MessageBuild {
     private String title;
     private MarkdownConfiguration<ActionCardMessageBuild> markdownConfiguration;
     private BuilderAdapter<Map<String, Object>> actionCardBuilderAdapter;
-    private Map<String, Object> actionCardMap = new LinkedHashMap<>();
+    private final Map<String, Object> actionCardMap = new LinkedHashMap<>();
     private int btnOrientation = -1;
 
     /**
@@ -76,8 +76,8 @@ public class ActionCardMessageBuild implements MessageBuild {
 
     private void buildActionCard(Message message) {
         Assert.notEmptyAllowed(title, "消息标题");
-        Assert.notEmptyAllowed(markdownConfiguration, "消息内容");
-        Assert.notEmptyAllowed(actionCardBuilderAdapter, "按钮信息");
+        Assert.notNullAllowed(markdownConfiguration, "消息内容");
+        Assert.notNullAllowed(actionCardBuilderAdapter, "按钮信息");
         actionCardMap.put("title", title);
         actionCardMap.put("text", markdownConfiguration.build());
         if (btnOrientation != -1) {

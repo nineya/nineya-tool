@@ -2,6 +2,9 @@ package com.nineya.tool.validate;
 
 import com.nineya.tool.text.CheckText;
 
+import java.util.Collection;
+import java.util.Map;
+
 /**
  * @author 殇雪话诀别
  * 2020/12/4
@@ -16,12 +19,47 @@ public class Assert {
      * @param value 参数
      * @param tips  提示信息
      */
-    public static void notEmptyAllowed(Object value, String tips) {
+    public static void notEmptyAllowed(String value, String tips) {
         if (value == null) {
             throw new IllegalArgumentException(tips + NULL_TIPS);
         }
-        if (value instanceof String
-            && ((String) value).trim().length() == 0) {
+        if (value.trim().length() == 0) {
+            throw new IllegalArgumentException(tips + NULL_TIPS);
+        }
+    }
+
+    /**
+     * 对参数进行验证，空值则抛出IllegalArgumentException
+     *
+     * @param value
+     * @param tips
+     */
+    public static <T> void notEmptyAllowed(Collection<T> value, String tips) {
+        if (value == null || value.isEmpty()) {
+            throw new IllegalArgumentException(tips + NULL_TIPS);
+        }
+    }
+
+    /**
+     * 对参数进行验证，空值则抛出IllegalArgumentException
+     *
+     * @param value
+     * @param tips
+     */
+    public static <T, V> void notEmptyAllowed(Map<T, V> value, String tips) {
+        if (value == null || value.isEmpty()) {
+            throw new IllegalArgumentException(tips + NULL_TIPS);
+        }
+    }
+
+    /**
+     * 对参数进行验证，null则抛出IllegalArgumentException
+     *
+     * @param value
+     * @param tips
+     */
+    public static <T> void notNullAllowed(Object value, String tips) {
+        if (value == null) {
             throw new IllegalArgumentException(tips + NULL_TIPS);
         }
     }
@@ -65,7 +103,8 @@ public class Assert {
 
     /**
      * 验证是不是md5字符串
-     * @param md5 字符串
+     *
+     * @param md5  字符串
      * @param tips 提示信息
      */
     public static void md5Allowed(String md5, String tips) {
@@ -76,8 +115,9 @@ public class Assert {
 
     /**
      * 验证是不是手机号
+     *
      * @param phone 字符串内容
-     * @param tips 提示信息
+     * @param tips  提示信息
      */
     public static void phoneAllowed(String phone, String tips) {
         if (!CheckText.checkPhone(phone)) {
@@ -87,7 +127,8 @@ public class Assert {
 
     /**
      * 验证是不是 url
-     * @param url 字符串内容
+     *
+     * @param url  字符串内容
      * @param tips 提示信息
      */
     public static void urlAllowed(String url, String tips) {
