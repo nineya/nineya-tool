@@ -34,7 +34,7 @@ public class Assert {
      * @param value
      * @param tips
      */
-    public static <T> void notEmptyAllowed(Collection<T> value, String tips) {
+    public static void notEmptyAllowed(Collection<?> value, String tips) {
         if (value == null || value.isEmpty()) {
             throw new IllegalArgumentException(tips + NULL_TIPS);
         }
@@ -46,7 +46,7 @@ public class Assert {
      * @param value
      * @param tips
      */
-    public static <T, V> void notEmptyAllowed(Map<T, V> value, String tips) {
+    public static void notEmptyAllowed(Map<?, ?> value, String tips) {
         if (value == null || value.isEmpty()) {
             throw new IllegalArgumentException(tips + NULL_TIPS);
         }
