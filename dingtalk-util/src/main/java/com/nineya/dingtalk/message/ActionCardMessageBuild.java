@@ -90,7 +90,7 @@ public class ActionCardMessageBuild implements MessageBuild {
     /**
      * 整体跳转
      */
-    private class OverallActionCard implements BuilderAdapter<Map<String, Object>> {
+    public class OverallActionCard implements BuilderAdapter<Map<String, Object>> {
         private String singleTitle;
         private String singleUrl;
 
