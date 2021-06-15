@@ -71,7 +71,7 @@ public class ResponseResult<T> {
         return new ResponseResult(StatusCode.SERVER_ERROR);
     }
 
-    public boolean getError() {
+    public boolean isError() {
         return error;
     }
 
