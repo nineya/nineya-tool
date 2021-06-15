@@ -17,7 +17,7 @@ public class HashUtils {
      * @param sf 为加密算法，可以有“MD5”、“SHA-1”，不区分大小写
      * @return 摘要内容
      */
-    public static String Hash(String string, String sf) {
+    public static String hash(String string, String sf) {
         try {
             MessageDigest md5 = MessageDigest.getInstance(sf);
             byte[] arr = md5.digest(string.getBytes(StandardCharsets.UTF_8));
