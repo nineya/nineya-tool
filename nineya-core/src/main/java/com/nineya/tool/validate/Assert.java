@@ -65,6 +65,18 @@ public class Assert {
     }
 
     /**
+     * 验证规则是不是玖涯id
+     *
+     * @param nineyaId nineyaId
+     * @param tips     提示信息
+     */
+    public static void nineyaIdAllowed(String nineyaId, String tips) {
+        if (!CheckText.checkNineyaId(nineyaId)) {
+            throw new IllegalArgumentException(tips + FORMAT_TIPS);
+        }
+    }
+
+    /**
      * 验证规则是不是密码
      *
      * @param password 密码

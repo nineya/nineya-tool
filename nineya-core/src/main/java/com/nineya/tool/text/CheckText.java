@@ -14,8 +14,8 @@ public class CheckText {
     public static final String MAIL_PATTERN = "^(\\w-*\\.*)+@(\\w-?)+(\\.\\w{2,})+$";
     public static final String NINEYA_ID_PATTERN = "^[a-zA-Z]\\w{4,15}+$";
     public static final String MD5_PATTERN = "^([a-fA-F0-9]{32})$";
-    public static final String NICK_NAME_PATTERN  = "([a-zA-Z\\u4e00-\\u9fa5]|[0-9]|"
-            + "[\\u3002\\uff1b\\uff0c\\uff1a\\u201c\\u201d\\uff08\\uff09\\u3001\\uff1f\\u300a\\u300b]){1,10}";
+    public static final String NICK_NAME_PATTERN = "([a-zA-Z\\u4e00-\\u9fa5]|[0-9]|"
+            + "\\*|[\\u3002\\uff1b\\uff0c\\uff1a\\u201c\\u201d\\uff08\\uff09\\u3001\\uff1f\\u300a\\u300b]){1,12}";
     public static final String CLIENT_ID_PATTERN = "^[a-zA-Z]\\w{1,8}+$";
 
     /**
@@ -70,7 +70,7 @@ public class CheckText {
         if (isEmpty(password)) {
             return false;
         }
-        return password.length()>=6 && password.length()<=20;
+        return password.length() >= 6 && password.length() <= 20;
 //        String re = "^([A-Z]|[a-z]|[0-9]|[`\\-=\\[\\];,./~!@#$&%^*()_+}{:?]){6,20}$";
 //        Pattern p = Pattern.compile(re);
 //        Matcher m = p.matcher(password);
@@ -142,6 +142,7 @@ public class CheckText {
 
     /**
      * 判断客户端id符不符合要求，5-16，可包含下划线
+     *
      * @param clientId
      * @return
      */

@@ -42,7 +42,7 @@ public class TimeUtil {
      * @return
      */
     public static String currentTime(String format) {
-        return new SimpleDateFormat(format).format(new Date());
+        return convertTime(new Date(), format);
     }
 
     /**
@@ -51,8 +51,17 @@ public class TimeUtil {
      * @return
      */
     public static long zeroTime() {
-        long current = System.currentTimeMillis();
-        return current - (current + TimeZone.getDefault().getRawOffset()) % TIME_DAY;
+        return zeroTime(System.currentTimeMillis());
+    }
+
+    /**
+     * 取得指定时间的0点时间
+     *
+     * @param time
+     * @return
+     */
+    public static long zeroTime(long time) {
+        return time - (time + TimeZone.getDefault().getRawOffset()) % TIME_DAY;
     }
 
     /**
@@ -73,6 +82,28 @@ public class TimeUtil {
             e.printStackTrace();
         }
         return 0;
+    }
+
+    /**
+     * 将long时间戳转换为String
+     *
+     * @param time
+     * @param format
+     * @return
+     */
+    public static String convertTime(long time, String format) {
+        return convertTime(new Date(time), format);
+    }
+
+    /**
+     * 将date时间转换为String
+     *
+     * @param time
+     * @param format
+     * @return
+     */
+    public static String convertTime(Date time, String format) {
+        return new SimpleDateFormat(format).format(time);
     }
 
     /**
