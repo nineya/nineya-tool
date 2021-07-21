@@ -17,7 +17,7 @@ public class ResponseResult<T> {
     /**
      * 响应状态码
      */
-    private int status;
+    private int code;
     /**
      * 错误信息
      */
@@ -28,17 +28,23 @@ public class ResponseResult<T> {
     private T data;
 
     public ResponseResult() {
-        this(StatusCode.SUCCESS);
     }
 
-    public ResponseResult(StatusCode resultCode) {
-        this.status = resultCode.getCode();
-        this.message = resultCode.getMessage();
-        this.error = resultCode != StatusCode.SUCCESS;
+    public ResponseResult(int code, T data) {
+        this.code = code;
+        this.data = data;
     }
 
-    public ResponseResult(StatusCode resultCode, T data) {
-        this(resultCode);
+    public ResponseResult(boolean error, int code, String message) {
+        this.error = error;
+        this.code = code;
+        this.message = message;
+    }
+
+    public ResponseResult(boolean error, int code, String message, T data) {
+        this.error = error;
+        this.code = code;
+        this.message = message;
         this.data = data;
     }
 
@@ -49,7 +55,7 @@ public class ResponseResult<T> {
      * @return ResponseResult对象
      */
     public static ResponseResult failure(StatusCode code, String message) {
-        return new ResponseResult(code).setMessage(message);
+        return new ResponseResult(true, code.getCode(), message);
     }
 
     /**
@@ -58,17 +64,8 @@ public class ResponseResult<T> {
      * @param data
      * @return
      */
-    public static <T> ResponseResult<T> access(T data) {
-        return new ResponseResult<>(StatusCode.SUCCESS, data);
-    }
-
-    /**
-     * 创建服务器错误的api对象
-     *
-     * @return
-     */
-    public static ResponseResult serverError() {
-        return new ResponseResult(StatusCode.SERVER_ERROR);
+    public static <T> ResponseResult<T> success(StatusCode code, T data) {
+        return new ResponseResult<>(false, code.getCode(), code.getMessage(), data);
     }
 
     public boolean isError() {
@@ -80,13 +77,12 @@ public class ResponseResult<T> {
         return this;
     }
 
-    public int getStatus() {
-        return status;
+    public int getCode() {
+        return code;
     }
 
-    public ResponseResult setStatus(int status) {
-        this.status = status;
-        return this;
+    public void setCode(int code) {
+        this.code = code;
     }
 
     public String getMessage() {
@@ -110,7 +106,7 @@ public class ResponseResult<T> {
     public Map<String, Object> toMap() {
         Map<String, Object> map = new LinkedHashMap<>();
         map.put("error", error);
-        map.put("status", status);
+        map.put("code", code);
         if (!CheckText.isEmpty(message)) {
             map.put("message", message);
         }
@@ -122,13 +118,14 @@ public class ResponseResult<T> {
 
     /**
      * 将响应信息转map输出
+     *
      * @return map信息
      */
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("ResponseResult{");
         sb.append("error=").append(error);
-        sb.append(", status=").append(status);
+        sb.append(", code=").append(code);
         sb.append(", message='").append(message).append('\'');
         sb.append(", data=").append(data);
         sb.append('}');

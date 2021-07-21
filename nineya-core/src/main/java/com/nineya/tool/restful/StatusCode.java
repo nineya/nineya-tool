@@ -4,47 +4,18 @@ package com.nineya.tool.restful;
  * @author 殇雪话诀别
  * 2020/11/12
  */
-public enum StatusCode {
+public interface StatusCode {
     /**
-     * 成功请求
+     * 取得编码
+     *
+     * @return
      */
-    SUCCESS(200, null),
-    /**
-     * 服务器错误
-     */
-    SERVER_ERROR(500, "Server Error."),
-    /**
-     * 资源未找到
-     */
-    NOT_FOUND(404, "Not Found."),
-    /**
-     * 禁止访问，没有权限
-     */
-    FORBIDDEN(403, "Forbidden."),
-    /**
-     * 用户未登录
-     */
-    UNAUTHORIZED(401, "Unauthorized.");
-
+    int getCode();
 
     /**
-     * 响应状态码
+     * 取得消息
+     *
+     * @return
      */
-    private int code;
-    /**
-     * 响应信息
-     */
-    private String message;
-
-    StatusCode(int code, String message) {
-        this.code = code;
-        this.message = message;
-    }
-
-    public int getCode() {
-        return code;
-    }
-    public String getMessage() {
-        return message;
-    }
+    String getMessage();
 }

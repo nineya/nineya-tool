@@ -41,7 +41,7 @@ public class AbstractHttpRequest<T extends AbstractHttpRequest> {
     }
 
     public T setContentType(String type) {
-        return addHeader(HttpHandlerName.CONTENT_TYYPE, type);
+        return addHeader(HttpHandlerName.CONTENT_TYPE, type);
     }
 
     public T setContentEncoding(String encode) {

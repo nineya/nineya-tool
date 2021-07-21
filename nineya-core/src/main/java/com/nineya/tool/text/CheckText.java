@@ -205,4 +205,19 @@ public class CheckText {
         Matcher m = p.matcher(nickName);
         return m.matches();
     }
+
+    /**
+     * 判断字符是否是正整数
+     *
+     * @param num
+     * @return
+     */
+    public static boolean checkPositiveInteger(String num) {
+        if (isEmpty(num)) {
+            return false;
+        }
+        Pattern p = Pattern.compile("^[\\d]*$");
+        Matcher m = p.matcher(num);
+        return m.matches();
+    }
 }
