@@ -58,6 +58,10 @@ public class ResponseResult<T> {
         return new ResponseResult(true, code.getCode(), message);
     }
 
+    public static ResponseResult failure(StatusCode code) {
+        return new ResponseResult(true, code.getCode(), code.getMessage());
+    }
+
     /**
      * 创建成功的响应
      *
@@ -81,8 +85,9 @@ public class ResponseResult<T> {
         return code;
     }
 
-    public void setCode(int code) {
+    public ResponseResult setCode(int code) {
         this.code = code;
+        return this;
     }
 
     public String getMessage() {

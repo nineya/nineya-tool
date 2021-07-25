@@ -8,7 +8,7 @@ package com.nineya.tool.entity;
  */
 public class Combination<T, V> {
     public T left;
-    private V right;
+    public V right;
 
     public Combination(T left, V right) {
         this.left = left;
