@@ -33,7 +33,7 @@
         <source.plugin.version>2.2.1</source.plugin.version>
         <javadoc.plugin.version>3.1.1</javadoc.plugin.version>
         <gpg.plugin.version>1.6</gpg.plugin.version>
-        <lombok.version>1.18.12</lombok.version>
+        <lombok.version>1.18.20</lombok.version>
         <spring-boot.version>2.3.4.RELEASE</spring-boot.version>
     </properties>
 
