@@ -2,6 +2,17 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <name>dingtalk-spring-boot-starter</name>
+    <description>Dingtalk robot kit to SpringBoot starter.</description>
+    <url>https://github.com/nineya/nineya-tool/tree/master/dingtalk-spring-boot-starter</url>
+
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+
     <parent>
         <artifactId>nineya-tool</artifactId>
         <groupId>com.nineya.tool</groupId>
@@ -10,6 +21,21 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>dingtalk-spring-boot-starter</artifactId>
+
+    <developers>
+        <developer>
+            <name>nineya</name>
+            <email>lswang@nineya.com</email>
+            <organization>nineya</organization>
+            <organizationUrl>https://blog.nineya.com</organizationUrl>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git@github.com:nineya/nineya-tool.git</connection>
+        <developerConnection>scm:git@github.com:nineya/nineya-tool.git</developerConnection>
+        <url>git@github.com:nineya/nineya-tool.git</url>
+    </scm>
 
     <dependencies>
         <dependency>

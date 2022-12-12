@@ -29,7 +29,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <fastjsonVersion>1.2.58</fastjsonVersion>
-        <sonatype.plugins.version>1.6.7</sonatype.plugins.version>
+        <sonatype.plugins.version>1.6.13</sonatype.plugins.version>
         <source.plugin.version>2.2.1</source.plugin.version>
         <javadoc.plugin.version>3.1.1</javadoc.plugin.version>
         <gpg.plugin.version>1.6</gpg.plugin.version>
@@ -106,13 +106,6 @@
     <profiles>
         <profile>
             <id>release</id>
-<!--            <activation>-->
-<!--                <activeByDefault>true</activeByDefault>-->
-<!--            </activation>-->
-            <properties>
-                <gpg.executable>E:\Program Files\Git\usr\bin\gpg.exe</gpg.executable>
-                <gpg.passphrase>LSW361654768</gpg.passphrase>
-            </properties>
             <build>
                 <plugins>
                     <plugin>
