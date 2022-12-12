@@ -68,8 +68,8 @@ public class ResponseResult<T> {
      * @param data
      * @return
      */
-    public static <T> ResponseResult<T> success(StatusCode code, T data) {
-        return new ResponseResult<>(false, code.getCode(), code.getMessage(), data);
+    public static <T> ResponseResult<T> success(T data) {
+        return new ResponseResult<>(false, NetworkStatus.OK.getCode(), NetworkStatus.OK.getMessage(), data);
     }
 
     public boolean isError() {
