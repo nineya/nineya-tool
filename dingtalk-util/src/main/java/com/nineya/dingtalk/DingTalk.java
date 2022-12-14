@@ -3,7 +3,8 @@ package com.nineya.dingtalk;
 import java.net.URLEncoder;
 import java.util.Base64;
 
-import com.alibaba.fastjson.JSONObject;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nineya.dingtalk.message.Message;
 import com.nineya.tool.charset.Charsets;
 import com.nineya.tool.http.HttpClient;
@@ -26,6 +27,8 @@ public class DingTalk {
     private final HttpClient client;
 
     private static final String DEFAULT_URL = "https://oapi.dingtalk.com/robot/send";
+
+    public static final ObjectMapper MAPPER = new ObjectMapper();
 
     public static DingTalk instance(String accessToken) {
         return new DingTalk(accessToken, null);
@@ -62,7 +65,11 @@ public class DingTalk {
             request.addParams("sign", buildSign(timeStamp));
         }
         String response = client.execute(request).getBody();
-        return JSONObject.parseObject(response, Response.class);
+        try {
+            return MAPPER.readValue(response, Response.class);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException("JSON 反序列化失败", e);
+        }
     }
 
     /**

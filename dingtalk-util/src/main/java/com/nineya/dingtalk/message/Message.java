@@ -1,9 +1,13 @@
 package com.nineya.dingtalk.message;
 
-import com.alibaba.fastjson.JSONObject;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+
+import static com.nineya.dingtalk.DingTalk.MAPPER;
 
 public class Message {
     private Map<String, Object> message;
@@ -26,6 +30,10 @@ public class Message {
     }
 
     public String toJsonString() {
-        return JSONObject.toJSONString(message);
+        try {
+            return MAPPER.writeValueAsString(message);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException("JSON 序列化失败", e);
+        }
     }
 }
