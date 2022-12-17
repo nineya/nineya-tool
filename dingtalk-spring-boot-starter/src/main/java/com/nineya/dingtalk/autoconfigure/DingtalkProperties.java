@@ -8,7 +8,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * 2021/5/31
  */
 @Data
-@ConfigurationProperties(prefix = "dingtalk")
+@ConfigurationProperties(prefix = "nineya.dingtalk")
 public class DingtalkProperties {
     private String phone;
     private String accessToken;

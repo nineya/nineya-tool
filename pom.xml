@@ -24,6 +24,7 @@
         <module>dingtalk-util</module>
         <module>feature-core</module>
         <module>dingtalk-spring-boot-starter</module>
+        <module>authentication-spring-boot-starter</module>
     </modules>
 
     <properties>
@@ -34,7 +35,9 @@
         <javadoc.plugin.version>3.1.1</javadoc.plugin.version>
         <gpg.plugin.version>1.6</gpg.plugin.version>
         <lombok.version>1.18.20</lombok.version>
-        <spring-boot.version>2.3.4.RELEASE</spring-boot.version>
+        <spring-boot.version>2.3.12.RELEASE</spring-boot.version>
+        <auth0.jwt.version>3.11.0</auth0.jwt.version>
+        <shiro.version>1.7.1</shiro.version>
     </properties>
 
     <developers>
@@ -109,6 +112,16 @@
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-annotations</artifactId>
                 <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-spring</artifactId>
+                <version>${shiro.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.auth0</groupId>
+                <artifactId>java-jwt</artifactId>
+                <version>${auth0.jwt.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
