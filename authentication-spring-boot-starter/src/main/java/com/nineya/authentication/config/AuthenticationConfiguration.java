@@ -149,7 +149,7 @@ public class AuthenticationConfiguration {
         Map<String, String> filterUrlMap = new LinkedHashMap<>();
         // 设置上下文过滤
         for (AuthenticationProperties.AuthFilterContext context : authenticationProperties.getAuthFilterContexts()) {
-            filterUrlMap.put(context.getUri(), context.getUri());
+            filterUrlMap.put(context.getUri(), context.getType());
         }
         //登录
         shiroFilterFactoryBean.setLoginUrl(authenticationProperties.getLoginUrl());

@@ -1,4 +1,6 @@
-package com.nineya.tool.text;
+package com.nineya.tool.util;
+
+import com.nineya.tool.text.CheckText;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -12,6 +14,8 @@ import java.util.TimeZone;
 public class TimeUtil {
     private static final String DEFAULT_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
     private static final String MINIMAL_TIME_FORMAT = "yyyyMMddHHmmss";
+
+    private static final String TIME_PATH_FORMAT = "yyyy/MM/";
     /**
      * 一天的时长
      */
@@ -85,11 +89,20 @@ public class TimeUtil {
     }
 
     /**
+     * 将指定时间转换为 yyyy/MM/ 年月分隔的路径
+     * @param time
+     * @return
+     */
+    public static String convertTimePath(long time) {
+        return convertTime(new Date(time), TIME_PATH_FORMAT);
+    }
+
+    /**
      * 将long时间戳转换为String
      *
      * @param time
      * @param format
-     * @return
+     * @returnaoshi
      */
     public static String convertTime(long time, String format) {
         return convertTime(new Date(time), format);

@@ -3,8 +3,6 @@ package com.nineya.tool.http;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.nineya.tool.util.HttpHandlerName;
-
 /**
  * 发送http请求，请求内容实体，包括请求头实体，请求参数实体，超时时间
  * @param <T>

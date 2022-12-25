@@ -1,4 +1,4 @@
-package com.nineya.tool.util;
+package com.nineya.tool.http;
 
 public class HttpHandlerName {
     public static final String CONTENT_TYPE = "Content-Type";

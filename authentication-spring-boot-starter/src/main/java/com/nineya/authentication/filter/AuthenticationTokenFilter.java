@@ -6,6 +6,7 @@ import com.nineya.authentication.isp.JwtToken;
 import com.nineya.tool.restful.NetworkStatus;
 import com.nineya.tool.restful.ResponseResult;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.ShiroException;
 import org.apache.shiro.authz.UnauthenticatedException;
 import org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter;
@@ -95,6 +96,19 @@ public class AuthenticationTokenFilter extends BasicHttpAuthenticationFilter {
         JwtToken jwtToken = new JwtToken(realmName, httpServletRequest, token);
         getSubject(request, response).login(jwtToken);
         return true;
+    }
+
+    /**
+     * 该方法将在过滤器执行完成后执行
+     * 当isAccessAllowed默认为true时必须实现该方法
+     * 在执行完请求后执行退出登录逻辑，否则下次请求时没有携带将可以直接访问接口，无须重新登录
+     * @param request
+     * @param response
+     * @throws Exception
+     */
+    @Override
+    protected void postHandle(ServletRequest request, ServletResponse response) throws Exception {
+        SecurityUtils.getSubject().logout();
     }
 
     /**
