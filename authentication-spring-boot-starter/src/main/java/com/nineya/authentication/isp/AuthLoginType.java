@@ -12,4 +12,5 @@ import lombok.Data;
 public class AuthLoginType implements LoginType {
     private String realmName;
     private String headerName;
+    private boolean allowCookieLogin;
 }

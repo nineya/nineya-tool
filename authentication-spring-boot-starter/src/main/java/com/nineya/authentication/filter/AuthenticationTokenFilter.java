@@ -15,6 +15,7 @@ import org.apache.shiro.web.util.WebUtils;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -35,6 +36,9 @@ public class AuthenticationTokenFilter extends BasicHttpAuthenticationFilter {
      */
     private final List<LoginType> loginTypes;
 
+    private static final String TOKEN_PARAM = "AuthenticationTokenFilterToken";
+    private static final String REALM_NAME_PARAM = "AuthenticationTokenFilterRealmName";
+
     public AuthenticationTokenFilter(ObjectMapper objectMapper, List<LoginType> loginTypes) {
         this.objectMapper = objectMapper;
         this.loginTypes = loginTypes;
@@ -48,8 +52,21 @@ public class AuthenticationTokenFilter extends BasicHttpAuthenticationFilter {
     protected boolean isLoginAttempt(ServletRequest request, ServletResponse response) {
         HttpServletRequest req = (HttpServletRequest) request;
         for (LoginType loginType : loginTypes) {
-            if (req.getHeader(loginType.getHeaderName()) != null) {
+            String token = req.getHeader(loginType.getHeaderName());
+            if (token != null) {
+                request.setAttribute(TOKEN_PARAM, token);
+                request.setAttribute(REALM_NAME_PARAM, loginType.getRealmName());
                 return true;
+            }
+            if (loginType.isAllowCookieLogin()) {
+                Cookie[] cookies= req.getCookies();
+                for (Cookie cookie : cookies) {
+                    if (cookie.getName().equals(loginType.getHeaderName())) {
+                        request.setAttribute(TOKEN_PARAM, cookie.getValue());
+                        request.setAttribute(REALM_NAME_PARAM, loginType.getRealmName());
+                        return true;
+                    }
+                }
             }
         }
         return false;
@@ -81,15 +98,8 @@ public class AuthenticationTokenFilter extends BasicHttpAuthenticationFilter {
     @Override
     protected boolean executeLogin(ServletRequest request, ServletResponse response) {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
-        String token = null;
-        String realmName = null;
-        for (LoginType loginType : loginTypes) {
-            token = httpServletRequest.getHeader(loginType.getHeaderName());
-            if (token != null) {
-                realmName = loginType.getRealmName();
-                break;
-            }
-        }
+        String token = (String) request.getAttribute(TOKEN_PARAM);
+        String realmName = (String) request.getAttribute(REALM_NAME_PARAM);
         if (token == null || realmName == null) {
             return false;
         }

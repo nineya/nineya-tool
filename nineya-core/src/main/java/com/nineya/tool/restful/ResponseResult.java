@@ -54,12 +54,12 @@ public class ResponseResult<T> {
      * @param message 返回的错误消息内容
      * @return ResponseResult对象
      */
-    public static ResponseResult failure(StatusCode code, String message) {
-        return new ResponseResult(true, code.getCode(), message);
+    public static <T> ResponseResult<T> failure(StatusCode code, String message) {
+        return new ResponseResult<>(true, code.getCode(), message);
     }
 
-    public static ResponseResult failure(StatusCode code) {
-        return new ResponseResult(true, code.getCode(), code.getMessage());
+    public static <T> ResponseResult<T> failure(StatusCode code) {
+        return new ResponseResult<>(true, code.getCode(), code.getMessage());
     }
 
     /**
@@ -76,7 +76,7 @@ public class ResponseResult<T> {
         return error;
     }
 
-    public ResponseResult setError(boolean error) {
+    public ResponseResult<?> setError(boolean error) {
         this.error = error;
         return this;
     }
@@ -85,7 +85,7 @@ public class ResponseResult<T> {
         return code;
     }
 
-    public ResponseResult setCode(int code) {
+    public ResponseResult<?> setCode(int code) {
         this.code = code;
         return this;
     }
@@ -94,7 +94,7 @@ public class ResponseResult<T> {
         return message;
     }
 
-    public ResponseResult setMessage(String message) {
+    public ResponseResult<?> setMessage(String message) {
         this.message = message;
         return this;
     }
@@ -103,11 +103,16 @@ public class ResponseResult<T> {
         return data;
     }
 
-    public ResponseResult setData(T data) {
+    public ResponseResult<?> setData(T data) {
         this.data = data;
         return this;
     }
 
+    /**
+     * 将响应信息转map输出
+     *
+     * @return map信息
+     */
     public Map<String, Object> toMap() {
         Map<String, Object> map = new LinkedHashMap<>();
         map.put("error", error);
@@ -121,19 +126,13 @@ public class ResponseResult<T> {
         return map;
     }
 
-    /**
-     * 将响应信息转map输出
-     *
-     * @return map信息
-     */
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("ResponseResult{");
-        sb.append("error=").append(error);
-        sb.append(", code=").append(code);
-        sb.append(", message='").append(message).append('\'');
-        sb.append(", data=").append(data);
-        sb.append('}');
-        return sb.toString();
+        return "ResponseResult{" +
+                "error=" + error +
+                ", code=" + code +
+                ", message='" + message + '\'' +
+                ", data=" + data +
+                '}';
     }
 }

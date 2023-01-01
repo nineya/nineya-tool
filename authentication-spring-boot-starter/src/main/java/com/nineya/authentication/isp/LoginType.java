@@ -20,4 +20,10 @@ public interface LoginType {
      * @return
      */
     String getHeaderName();
+
+    /**
+     * 允许通过 cookie登录
+     * @return
+     */
+    boolean isAllowCookieLogin();
 }
