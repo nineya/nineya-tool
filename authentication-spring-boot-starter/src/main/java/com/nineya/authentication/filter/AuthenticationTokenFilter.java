@@ -37,7 +37,7 @@ public class AuthenticationTokenFilter extends BasicHttpAuthenticationFilter {
     private final List<LoginType> loginTypes;
 
     private static final String TOKEN_PARAM = "AuthenticationTokenFilterToken";
-    private static final String REALM_NAME_PARAM = "AuthenticationTokenFilterRealmName";
+    private static final String LOGIN_TYPE_PARAM = "AuthenticationTokenFilterLoginType";
 
     public AuthenticationTokenFilter(ObjectMapper objectMapper, List<LoginType> loginTypes) {
         this.objectMapper = objectMapper;
@@ -55,7 +55,7 @@ public class AuthenticationTokenFilter extends BasicHttpAuthenticationFilter {
             String token = req.getHeader(loginType.getHeaderName());
             if (token != null) {
                 request.setAttribute(TOKEN_PARAM, token);
-                request.setAttribute(REALM_NAME_PARAM, loginType.getRealmName());
+                request.setAttribute(LOGIN_TYPE_PARAM, loginType);
                 return true;
             }
             if (loginType.isAllowCookieLogin()) {
@@ -63,7 +63,7 @@ public class AuthenticationTokenFilter extends BasicHttpAuthenticationFilter {
                 for (Cookie cookie : cookies) {
                     if (cookie.getName().equals(loginType.getHeaderName())) {
                         request.setAttribute(TOKEN_PARAM, cookie.getValue());
-                        request.setAttribute(REALM_NAME_PARAM, loginType.getRealmName());
+                        request.setAttribute(LOGIN_TYPE_PARAM, loginType);
                         return true;
                     }
                 }
@@ -99,11 +99,8 @@ public class AuthenticationTokenFilter extends BasicHttpAuthenticationFilter {
     protected boolean executeLogin(ServletRequest request, ServletResponse response) {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         String token = (String) request.getAttribute(TOKEN_PARAM);
-        String realmName = (String) request.getAttribute(REALM_NAME_PARAM);
-        if (token == null || realmName == null) {
-            return false;
-        }
-        JwtToken jwtToken = new JwtToken(realmName, httpServletRequest, token);
+        LoginType loginType = (LoginType) request.getAttribute(LOGIN_TYPE_PARAM);
+        JwtToken jwtToken = new JwtToken(loginType, httpServletRequest, (HttpServletResponse) response, token);
         getSubject(request, response).login(jwtToken);
         return true;
     }

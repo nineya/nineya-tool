@@ -3,6 +3,7 @@ package com.nineya.authentication.isp;
 import org.apache.shiro.authc.BearerToken;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * 自定义的 token 实体类，需要在 token 中添加登录类型对应的 realmName 信息，为了后续的判断
@@ -12,20 +13,31 @@ import javax.servlet.http.HttpServletRequest;
  * 2021/2/18
  */
 public class JwtToken extends BearerToken {
-    private final String realmName;
+    private final LoginType loginType;
     private final HttpServletRequest request;
 
-    public JwtToken(String realmName, HttpServletRequest request, String token) {
+    private final HttpServletResponse response;
+
+    public JwtToken(LoginType loginType, HttpServletRequest request, HttpServletResponse response, String token) {
         super(token, request.getRemoteAddr());
-        this.realmName = realmName;
+        this.loginType = loginType;
         this.request = request;
+        this.response = response;
     }
 
     public String getRealmName() {
-        return realmName;
+        return loginType.getRealmName();
+    }
+
+    public LoginType getLoginType() {
+        return loginType;
     }
 
     public HttpServletRequest getRequest() {
         return request;
+    }
+
+    public HttpServletResponse getResponse() {
+        return response;
     }
 }
